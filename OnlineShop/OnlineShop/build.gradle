@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.4'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'war'
+}
+
+group = 'hkmu.wadd.onlineshop'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 核心 Web 支援 (包含 Spring MVC 與內嵌 Tomcat)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // 數據庫持久化支援 (Spring Data JPA)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // 安全認證支援 (Spring Security)
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // 表單驗證支援 (Bean Validation)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // JSP 渲染支援 (Jasper)
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+    // JSTL 標籤庫 (Jakarta 版本)
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+    implementation 'org.springframework.security:spring-security-taglibs'
+    implementation 'jakarta.servlet:jakarta.servlet-api'
+    // H2 內嵌數據庫 (Runtime 使用)
+    runtimeOnly 'com.h2database:h2'
+
+    // 測試工具
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
